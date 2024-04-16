@@ -1,22 +1,54 @@
 const express = require('express')
 const app = express()
-const port = 5500
 const sqlite3 = require('sqlite3')
 
-app.set('view engine', 'ejs')
-// run npm run dev to get this working
-app.use(express.static('public'));
+const port = 5500
 
+
+// you need to run: 
+// npm run dev 
+// to get this working
+
+// index.ejs file needs an ejs view engine to render
+app.set('view engine', 'ejs')
+// express.js serves the files in the public folder to user
+app.use(express.static('public'));
+app.use(express.json());
+
+// any text sent as a parameter to the base url gets turned into a database query 
+// to-do: stop users from sending too many database requests
 app.get('/:id', (req, res) => {
     querydb(req.params.id, getResponse, res);
 })
 
+app.get('/redirect/:id', (req, res) => {
+    // const { id } = req.params;
+    // console.log(id);
+    // res.status(200);
+    //res.redirect(301, '/' + req.params.id);
+    res.status(201).json({
+        redirectUrl: '/' + req.params.id
+    });
+})
+
+// app.post('/', (req, res) => {
+//     const { parcel } = req.body
+//     console.log(parcel)
+//     if(!parcel) {
+//         return res.status(400).send({status: failed})
+//     }
+//     res.redirect('/' + parcel)
+//     //res.status(200).send({status: 'recieved'})
+// })
+
 app.listen(port, () => console.log(`server has started on port: ${port}`));
 
+// callback method used so that res.render() gets called after the database query
 function getResponse(res, pt_information){
     //json in the response should have data from the database
     res.render("index", pt_information)
 }
+
 
 function querydb(pt_number, callback, res){
     // open the database
@@ -28,6 +60,7 @@ function querydb(pt_number, callback, res){
         console.log('Connected to the bridge database.');
     });
 
+    // input pt_number -> output row which gets assigned to obj
     db.serialize(() => {
         db.each('SELECT * FROM bridge WHERE pt_number = "' + pt_number + '"', (err, row) => {
             if (err) {
@@ -37,6 +70,8 @@ function querydb(pt_number, callback, res){
             obj = row;
         });
     });
+
+    // close connection and call the callback function
     db.close((err) => {
         if (err) {
         console.error(err.message);
