@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <table>
+    <colgroup>
+      <col span="1" style="text-align: left;">
+      <col span="1" style="text-align: right;">
+    </colgroup>
+    <tr>
+      <td>Part Number: </td>
+      <td><%= locals.pt_number || 'Value doesnt exist' %></td>
+    </tr>
+    <tr>
+      <td>sta: </td>
+      <td><%= locals.sta %></td>
+    </tr>
+    <tr>
+      <td>os_ptl: </td>
+      <td><%= locals.os_ptl %></td>
+    </tr>
+    <tr>
+      <td>span: </td>
+      <td><%= locals.span %></td>
+    </tr>
+    <tr>
+      <td>beam: </td>
+      <td><%= locals.beam %>
+      </td>
+    </tr>
+    <tr>
+      <td>location: </td>
+      <td><%= locals.location %>
+      </td>
+    </tr>
+    <tr>
+      <td>top_deck: </td>
+      <td><%= locals.top_deck %></td>
+    </tr>
+    <tr>
+      <td>adj: </td>
+      <td><%= locals.adj %></td>
+    </tr>
+    <tr>
+      <td>hundred: </td>
+      <td><%= locals.hundred %></td>
+    </tr>
+    <tr>
+      <td>eighty: </td>
+      <td><%= locals.eighty %></td>
+    </tr>
+    <tr>
+      <td>one: </td>
+      <td><%= locals.one %></td>
+    </tr>
+    <tr>
+      <td>bottom_defl: </td>
+      <td><%= locals.bottom_defl %></td>
+    </tr>
+    <tr>
+      <td>x_slope: </td>
+      <td><%= locals.x_slope %></td>
+    </tr>
+    <tr>
+      <td>fill: </td>
+      <td><%= locals.fill %></td>
+    </tr>
+    <tr>
+      <td>field_shot: </td>
+      <td><%= locals.field_shot %></td>
+    </tr>
+    <tr>
+      <td>x_slope_two: </td>
+      <td><%= locals.x_slope_two %></td>
+    </tr>
+    <tr>
+      <td>l_r_c: </td>
+      <td><%= locals.l_r_c %></td>
+    </tr>
+  </table>
+</body>
+
+</html>
